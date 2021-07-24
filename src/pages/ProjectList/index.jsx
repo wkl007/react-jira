@@ -2,7 +2,7 @@ import SearchPanel from "./SearchPanel";
 import List from "./List";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { cleanObject } from "../../utils";
+import { cleanObject, useDebounce } from "../../utils";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -14,13 +14,15 @@ const ProjectList = () => {
   const [users, setUsers] = useState([]);
   const [list, setList] = useState([]);
 
+  const debouncedParams = useDebounce(params, 300);
+
   useEffect(() => {
     axios
-      .get(`${apiUrl}/projects`, { params: cleanObject(params) })
+      .get(`${apiUrl}/projects`, { params: cleanObject(debouncedParams) })
       .then((res) => {
         setList(res.data);
       });
-  }, [params]);
+  }, [debouncedParams]);
 
   useEffect(() => {
     axios.get(`${apiUrl}/users`).then((res) => {

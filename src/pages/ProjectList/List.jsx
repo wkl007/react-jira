@@ -8,8 +8,8 @@ const List = ({ users, list }) => {
         </tr>
       </thead>
       <tbody>
-        {list.map((item, index) => (
-          <tr key={index}>
+        {list.map((item) => (
+          <tr key={item.id}>
             <td>{item.name}</td>
             <td>
               {users.find((user) => user.id === item.personId)?.name || "未知"}
