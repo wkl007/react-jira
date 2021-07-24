@@ -1,7 +1,22 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import type { Dispatch, FC, SetStateAction } from "react";
 
-const SearchPanel = ({ users, params, setParams }) => {
+export interface Params {
+  name: string;
+  personId: string;
+}
+
+export interface User {
+  id: number;
+  name: string;
+}
+
+interface SearchPanelProps {
+  users: User[];
+  params: Params;
+  setParams: Dispatch<SetStateAction<Params>>;
+}
+
+const SearchPanel: FC<SearchPanelProps> = ({ users, params, setParams }) => {
   return (
     <form>
       <div>

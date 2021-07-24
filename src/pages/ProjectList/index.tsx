@@ -1,18 +1,18 @@
-import SearchPanel from "./SearchPanel";
-import List from "./List";
-import { useEffect, useState } from "react";
+import SearchPanel, { Params, User } from "./SearchPanel";
+import List, { Project } from "./List";
+import { FC, useEffect, useState } from "react";
 import axios from "axios";
 import { cleanObject, useDebounce } from "../../utils";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-const ProjectList = () => {
-  const [params, setParams] = useState({
+const ProjectList: FC = () => {
+  const [params, setParams] = useState<Params>({
     name: "",
     personId: "",
   });
-  const [users, setUsers] = useState([]);
-  const [list, setList] = useState([]);
+  const [users, setUsers] = useState<User[]>([]);
+  const [list, setList] = useState<Project[]>([]);
 
   const debouncedParams = useDebounce(params, 300);
 
