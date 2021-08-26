@@ -1,17 +1,17 @@
-import { User } from "./SearchPanel";
-import { FC } from "react";
+import { User } from './SearchPanel'
+import { FC } from 'react'
 
 export interface Project {
-  id: number;
-  name: string;
-  personId: number;
-  organization: string;
-  created: number;
+  id: number
+  name: string
+  personId: number
+  organization: string
+  created: number
 }
 
 interface ListProps {
-  users: User[];
-  list: Project[];
+  users: User[]
+  list: Project[]
 }
 
 const List: FC<ListProps> = ({ users, list }) => {
@@ -28,13 +28,13 @@ const List: FC<ListProps> = ({ users, list }) => {
           <tr key={item.id}>
             <td>{item.name}</td>
             <td>
-              {users.find((user) => user.id === item.personId)?.name || "未知"}
+              {users.find((user) => user.id === item.personId)?.name || '未知'}
             </td>
           </tr>
         ))}
       </tbody>
     </table>
-  );
-};
+  )
+}
 
-export default List;
+export default List

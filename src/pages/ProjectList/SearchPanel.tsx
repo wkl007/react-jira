@@ -1,20 +1,20 @@
-import type { Dispatch, FC, SetStateAction } from "react";
+import type { Dispatch, FC, SetStateAction } from 'react'
 
 export interface Params {
-  name: string;
-  personId: string;
+  name: string
+  personId: string
 }
 
 export interface User {
-  id: number;
-  name: string;
-  token: string;
+  id: number
+  name: string
+  token: string
 }
 
 interface SearchPanelProps {
-  users: User[];
-  params: Params;
-  setParams: Dispatch<SetStateAction<Params>>;
+  users: User[]
+  params: Params
+  setParams: Dispatch<SetStateAction<Params>>
 }
 
 const SearchPanel: FC<SearchPanelProps> = ({ users, params, setParams }) => {
@@ -49,7 +49,7 @@ const SearchPanel: FC<SearchPanelProps> = ({ users, params, setParams }) => {
         </select>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default SearchPanel;
+export default SearchPanel
