@@ -1,16 +1,12 @@
 import React from 'react'
-import { AuthProvider } from './context/auth-context'
+import { useAuth } from './context/auth-context'
 import './App.css'
-import Login from './pages/Login'
+import User from './pages/user'
+import BasicLayout from './layouts/BasicLayout'
 
 function App() {
-  return (
-    <div className="App">
-      <AuthProvider>
-        <Login />
-      </AuthProvider>
-    </div>
-  )
+  const { user } = useAuth()
+  return <div className="App">{user ? <BasicLayout /> : <User />}</div>
 }
 
 export default App

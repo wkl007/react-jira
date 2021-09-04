@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react'
 import * as auth from '../auth-provider'
-import type { User } from '../pages/ProjectList/SearchPanel'
+import type { User } from '../pages/project-list/components/SearchPanel'
 
 interface AuthForm {
   username: string

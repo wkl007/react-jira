@@ -1,4 +1,4 @@
-import { User } from './pages/ProjectList/SearchPanel'
+import { User } from './pages/project-list/components/SearchPanel'
 import axios from 'axios'
 
 const apiUrl = process.env.REACT_APP_API_URL

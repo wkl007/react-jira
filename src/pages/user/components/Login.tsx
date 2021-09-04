@@ -1,8 +1,8 @@
 import { FC, FormEvent } from 'react'
-import { useAuth } from '../../context/auth-context'
+import { useAuth } from '../../../context/auth-context'
 
 const Login: FC = () => {
-  const { login, user, register } = useAuth()
+  const { login, user } = useAuth()
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -13,7 +13,6 @@ const Login: FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {JSON.stringify(user)}
       <div>
         <label htmlFor="username">用户名</label>
         <input type="text" id="username" />

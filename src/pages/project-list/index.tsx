@@ -1,5 +1,5 @@
-import SearchPanel, { Params, User } from './SearchPanel'
-import List, { Project } from './List'
+import SearchPanel, { Params, User } from './components/SearchPanel'
+import List, { Project } from './components/List'
 import { FC, useEffect, useState } from 'react'
 import axios from 'axios'
 import { cleanObject, useDebounce } from '../../utils'
