@@ -1,13 +1,14 @@
 import React from 'react'
+import { AuthProvider } from './context/auth-context'
 import './App.css'
-import ProjectList from './pages/ProjectList'
 import Login from './pages/Login'
 
 function App() {
   return (
     <div className="App">
-      {/*<ProjectList />*/}
-      <Login />
+      <AuthProvider>
+        <Login />
+      </AuthProvider>
     </div>
   )
 }
