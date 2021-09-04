@@ -1,13 +1,5 @@
-import { User } from './SearchPanel'
 import { FC } from 'react'
-
-export interface Project {
-  id: number
-  name: string
-  personId: number
-  organization: string
-  created: number
-}
+import { Project, User } from '../../../api/project'
 
 interface ListProps {
   users: User[]

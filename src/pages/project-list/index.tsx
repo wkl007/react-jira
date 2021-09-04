@@ -1,13 +1,11 @@
-import SearchPanel, { Params, User } from './components/SearchPanel'
-import List, { Project } from './components/List'
 import { FC, useEffect, useState } from 'react'
-import axios from 'axios'
+import SearchPanel from './components/SearchPanel'
+import List from './components/List'
 import { cleanObject, useDebounce } from '../../utils'
-
-const apiUrl = process.env.REACT_APP_API_URL
+import ProjectServer, { Project, ProjectReq, User } from '../../api/project'
 
 const ProjectList: FC = () => {
-  const [params, setParams] = useState<Params>({
+  const [params, setParams] = useState<ProjectReq>({
     name: '',
     personId: '',
   })
@@ -17,16 +15,17 @@ const ProjectList: FC = () => {
   const debouncedParams = useDebounce(params, 300)
 
   useEffect(() => {
-    axios
-      .get(`${apiUrl}/projects`, { params: cleanObject(debouncedParams) })
-      .then((res) => {
-        setList(res.data)
-      })
+    ProjectServer.getProjectList(cleanObject(debouncedParams)).then((res) => {
+      setList(res)
+    })
   }, [debouncedParams])
 
   useEffect(() => {
-    axios.get(`${apiUrl}/users`).then((res) => {
-      setUsers(res.data)
+    // axios.get(`${apiUrl}/users`).then((res) => {
+    //   setUsers(res.data)
+    // })
+    ProjectServer.getUserList().then((res) => {
+      setUsers(res)
     })
   }, [])
 

@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import Login from './components/Login'
 import Register from './components/Register'
 
-const User = () => {
+const User: FC = () => {
   const [isRegister, setRegister] = useState(false)
 
   return (

@@ -25,6 +25,12 @@ export const useDebounce = <T>(value: T, delay?: number): T => {
   return debounceValue
 }
 
+export const useMount = (callback: () => void) => {
+  useEffect(() => {
+    callback()
+  }, [callback])
+}
+
 export const useArray = <T>(initialArray: T[]) => {
   const [value, setValue] = useState(initialArray)
 

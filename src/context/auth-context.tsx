@@ -1,6 +1,13 @@
-import React, { createContext, ReactNode, useContext, useState } from 'react'
-import * as auth from '../auth-provider'
-import type { User } from '../pages/project-list/components/SearchPanel'
+import React, {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
+import UserServer, { User } from '../api/user'
+import { ACCESS_TOKEN } from '../utils/constants'
 
 interface AuthForm {
   username: string
@@ -20,20 +27,35 @@ AuthContext.displayName = 'AuthContext'
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null)
+
   const login = async (form: AuthForm) => {
-    const res = await auth.login(form)
-    setUser(res)
+    const { user } = await UserServer.login(form)
+    localStorage.setItem(ACCESS_TOKEN, user.token)
+    setUser(user)
   }
 
   const register = async (form: AuthForm) => {
-    const res = await auth.register(form)
-    setUser(res)
+    const { user } = await UserServer.register(form)
+    localStorage.setItem(ACCESS_TOKEN, user.token)
+    setUser(user)
   }
 
   const logout = () => {
-    auth.logout()
+    localStorage.removeItem(ACCESS_TOKEN)
     setUser(null)
   }
+
+  const getUserInfo = useCallback(async () => {
+    const token = localStorage.getItem(ACCESS_TOKEN)
+    if (token) {
+      const { user } = await UserServer.getUserInfo()
+      setUser(user)
+    }
+  }, [])
+
+  useEffect(() => {
+    getUserInfo()
+  }, [getUserInfo])
 
   return (
     <AuthContext.Provider

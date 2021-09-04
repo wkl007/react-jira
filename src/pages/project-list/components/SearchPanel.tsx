@@ -1,20 +1,10 @@
 import type { Dispatch, FC, SetStateAction } from 'react'
-
-export interface Params {
-  name: string
-  personId: string
-}
-
-export interface User {
-  id: number
-  name: string
-  token: string
-}
+import { ProjectReq, User } from '../../../api/project'
 
 interface SearchPanelProps {
   users: User[]
-  params: Params
-  setParams: Dispatch<SetStateAction<Params>>
+  params: ProjectReq
+  setParams: Dispatch<SetStateAction<ProjectReq>>
 }
 
 const SearchPanel: FC<SearchPanelProps> = ({ users, params, setParams }) => {
