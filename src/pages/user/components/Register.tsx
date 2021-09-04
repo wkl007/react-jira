@@ -1,28 +1,35 @@
-import { FC, FormEvent } from 'react'
+import { FC } from 'react'
+import { Button, Form, Input } from 'antd'
 import { useAuth } from '../../../context/auth-context'
+import { UserReq } from '../../../api/user'
 
 const Register: FC = () => {
   const { register } = useAuth()
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const username = (e.currentTarget.elements[0] as HTMLFormElement).value
-    const password = (e.currentTarget.elements[1] as HTMLFormElement).value
-    await register({ username, password })
+  const handleSubmit = async (values: UserReq) => {
+    await register(values)
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="username">用户名</label>
-        <input type="text" id="username" />
-      </div>
-      <div>
-        <label htmlFor="password">密码</label>
-        <input type="password" id="password" />
-      </div>
-      <button type="submit">注册</button>
-    </form>
+    <Form onFinish={handleSubmit}>
+      <Form.Item
+        name="username"
+        rules={[{ required: true, message: '请输入用户名' }]}
+      >
+        <Input placeholder="用户名" type="text" />
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[{ required: true, message: '请输入密码' }]}
+      >
+        <Input placeholder="密码" type="password" />
+      </Form.Item>
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          注册
+        </Button>
+      </Form.Item>
+    </Form>
   )
 }
 

@@ -1,15 +1,16 @@
 module.exports = {
   extends: [
-    "stylelint-config-standard",
-    "stylelint-config-rational-order",
-    "stylelint-config-prettier",
+    'stylelint-config-standard',
+    'stylelint-config-rational-order',
+    'stylelint-config-prettier',
   ],
-  plugins: ["stylelint-order"],
+  plugins: ['stylelint-order'],
   rules: {
-    "selector-pseudo-class-no-unknown": null,
-    "no-descending-specificity": null,
-    "at-rule-no-unknown": null,
-    "font-family-no-missing-generic-family-keyword": null,
-    "selector-type-no-unknown": null,
+    'no-empty-source': null,
+    'selector-pseudo-class-no-unknown': null,
+    'no-descending-specificity': null,
+    'at-rule-no-unknown': null,
+    'font-family-no-missing-generic-family-keyword': null,
+    'selector-type-no-unknown': null,
   },
-};
+}
