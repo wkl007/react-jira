@@ -1,4 +1,10 @@
 import { useEffect, useState } from 'react'
+import dayjs, { ConfigType } from 'dayjs'
+
+export const dateFormat = (
+  date: ConfigType,
+  format = 'YYYY-MM-DD HH:mm:ss'
+): string => dayjs(date).format(format)
 
 export const isFalsy = (value: unknown): boolean =>
   value === 0 ? false : !value

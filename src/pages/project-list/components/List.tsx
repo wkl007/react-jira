@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Table, TableColumnsType } from 'antd'
 import { Project, User } from '@/api/project'
+import { dateFormat } from '@/utils'
 
 interface ListProps {
   users: User[]
@@ -28,7 +29,9 @@ const List: FC<ListProps> = ({ users, list }) => {
     },
     {
       title: '创建时间',
-      render: (value, record) => <span>{record.created}</span>,
+      render: (value, record) => (
+        <span>{record.created ? dateFormat(record.created) : '暂无'}</span>
+      ),
     },
   ]
 
