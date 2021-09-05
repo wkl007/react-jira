@@ -1,6 +1,6 @@
 import type { Dispatch, FC, SetStateAction } from 'react'
 import { Input, Form, Select } from 'antd'
-import { ProjectReq, User } from '../../../api/project'
+import { ProjectReq, User } from '@/api/project'
 
 interface SearchPanelProps {
   users: User[]

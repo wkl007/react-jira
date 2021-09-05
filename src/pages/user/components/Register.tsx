@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Button, Form, Input } from 'antd'
-import { useAuth } from '../../../context/auth-context'
-import { UserReq } from '../../../api/user'
+import { useAuth } from '@/context/auth-context'
+import { UserReq } from '@/api/user'
 
 const Register: FC = () => {
   const { register } = useAuth()

@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Table, TableColumnsType } from 'antd'
-import { Project, User } from '../../../api/project'
+import { Project, User } from '@/api/project'
 
 interface ListProps {
   users: User[]

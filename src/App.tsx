@@ -1,8 +1,8 @@
 import React from 'react'
-import { useAuth } from './context/auth-context'
-import './App.css'
-import User from './pages/user'
-import BasicLayout from './layouts/BasicLayout'
+import '@/App.css'
+import User from '@/pages/user'
+import BasicLayout from '@/layouts/BasicLayout'
+import { useAuth } from '@/context/auth-context'
 
 function App() {
   const { user } = useAuth()

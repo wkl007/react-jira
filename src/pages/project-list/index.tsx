@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from 'react'
 import SearchPanel from './components/SearchPanel'
 import List from './components/List'
-import { cleanObject, useDebounce } from '../../utils'
-import ProjectServer, { Project, ProjectReq, User } from '../../api/project'
+import { cleanObject, useDebounce } from '@/utils'
+import ProjectServer, { Project, ProjectReq, User } from '@/api/project'
 
 const ProjectList: FC = () => {
   const [params, setParams] = useState<ProjectReq>({

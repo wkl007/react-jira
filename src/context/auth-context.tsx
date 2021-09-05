@@ -6,8 +6,8 @@ import React, {
   useEffect,
   useState,
 } from 'react'
-import UserServer, { User } from '../api/user'
-import { ACCESS_TOKEN } from '../utils/constants'
+import UserServer, { User } from '@/api/user'
+import { ACCESS_TOKEN } from '@/utils/constants'
 
 interface AuthForm {
   username: string

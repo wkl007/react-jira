@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import ProjectList from '../pages/project-list'
-import { useAuth } from '../context/auth-context'
+import ProjectList from '@/pages/project-list'
+import { useAuth } from '@/context/auth-context'
 
 const BasicLayout: FC = () => {
   const { logout } = useAuth()

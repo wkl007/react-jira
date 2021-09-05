@@ -1,10 +1,13 @@
 const CracoLessPlugin = require('craco-less')
+const resolve = (dir) => require('path').join(__dirname, dir)
 
 module.exports = {
   reactScriptsVersion: 'react-scripts',
   style: {},
   webpack: {
-    alias: {},
+    alias: {
+      '@': resolve('src'),
+    },
     plugins: {},
   },
   plugins: [
