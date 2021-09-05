@@ -2,16 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
-import { loadDevTools } from 'jira-dev-tool'
+import { DevTools, loadServer } from 'jira-dev-tool'
 import 'antd/dist/antd.less'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { AppProviders } from './context'
 
-loadDevTools(() => {
+loadServer(() => {
   ReactDOM.render(
     <React.StrictMode>
       <AppProviders>
+        <DevTools />
         <ConfigProvider locale={zhCN}>
           <App />
         </ConfigProvider>

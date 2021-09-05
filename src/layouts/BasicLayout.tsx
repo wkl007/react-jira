@@ -7,7 +7,6 @@ import { useAuth } from '@/context/auth-context'
 import { ReactComponent as SoftwareLogo } from '@/assets/software-logo.svg'
 
 const BasicLayout: FC = () => {
-  const { logout } = useAuth()
   return (
     <Container>
       <PageHeader />
