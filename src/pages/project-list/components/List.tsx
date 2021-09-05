@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { Table, TableColumnsType } from 'antd'
 import { Project, User } from '../../../api/project'
 
 interface ListProps {
@@ -7,25 +8,39 @@ interface ListProps {
 }
 
 const List: FC<ListProps> = ({ users, list }) => {
+  const columns: TableColumnsType<Project> = [
+    {
+      title: '姓名',
+      dataIndex: 'name',
+      sorter: (a, b) => a.name.localeCompare(b.name),
+    },
+    {
+      title: '部门',
+      dataIndex: 'organization',
+    },
+    {
+      title: '负责人',
+      render: (value, record) => (
+        <span>
+          {users.find((user) => user.id === record.personId)?.name || '未知'}
+        </span>
+      ),
+    },
+    {
+      title: '创建时间',
+      render: (value, record) => <span>{record.created}</span>,
+    },
+  ]
+
   return (
-    <table>
-      <thead>
-        <tr>
-          <td>名称</td>
-          <td>负责人</td>
-        </tr>
-      </thead>
-      <tbody>
-        {list.map((item) => (
-          <tr key={item.id}>
-            <td>{item.name}</td>
-            <td>
-              {users.find((user) => user.id === item.personId)?.name || '未知'}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <Table
+      bordered
+      size='small'
+      rowKey='id'
+      pagination={false}
+      columns={columns}
+      dataSource={list}
+    />
   )
 }
 

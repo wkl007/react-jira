@@ -6,7 +6,7 @@ import BasicLayout from './layouts/BasicLayout'
 
 function App() {
   const { user } = useAuth()
-  return <div className="App">{user ? <BasicLayout /> : <User />}</div>
+  return <div className='App'>{user ? <BasicLayout /> : <User />}</div>
 }
 
 export default App

@@ -1,4 +1,5 @@
 import type { Dispatch, FC, SetStateAction } from 'react'
+import { Input, Form, Select } from 'antd'
 import { ProjectReq, User } from '../../../api/project'
 
 interface SearchPanelProps {
@@ -9,10 +10,11 @@ interface SearchPanelProps {
 
 const SearchPanel: FC<SearchPanelProps> = ({ users, params, setParams }) => {
   return (
-    <form>
-      <div>
-        <input
-          type="text"
+    <Form layout='inline' style={{ marginBottom: '2rem' }}>
+      <Form.Item>
+        <Input
+          placeholder='项目名'
+          type='text'
           value={params.name}
           onChange={(e) =>
             setParams((prevState) => ({
@@ -21,24 +23,26 @@ const SearchPanel: FC<SearchPanelProps> = ({ users, params, setParams }) => {
             }))
           }
         />
-        <select
+      </Form.Item>
+      <Form.Item>
+        <Select
           value={params.personId}
-          onChange={(e) =>
+          onChange={(value) =>
             setParams((prevState) => ({
               ...prevState,
-              personId: e.target.value,
+              personId: value,
             }))
           }
         >
-          <option value="">负责人</option>
+          <Select.Option value=''>负责人</Select.Option>
           {users.map((user) => (
-            <option key={user.id} value={user.id}>
+            <Select.Option key={user.id} value={user.id}>
               {user.name}
-            </option>
+            </Select.Option>
           ))}
-        </select>
-      </div>
-    </form>
+        </Select>
+      </Form.Item>
+    </Form>
   )
 }
 
