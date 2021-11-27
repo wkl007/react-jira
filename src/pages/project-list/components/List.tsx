@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { Table, TableColumnsType, TableProps } from 'antd'
+import { Link } from 'react-router-dom'
 import { Project, User } from '@/api/project'
 import { dateFormat } from '@/utils'
 
@@ -10,9 +11,12 @@ interface ListProps extends TableProps<Project> {
 const List: FC<ListProps> = ({ users, ...props }) => {
   const columns: TableColumnsType<Project> = [
     {
-      title: '姓名',
+      title: '名称',
       dataIndex: 'name',
       sorter: (a, b) => a.name.localeCompare(b.name),
+      render: (value, record) => (
+        <Link to={`projects/${record.id}`}>{record.name}</Link>
+      ),
     },
     {
       title: '部门',

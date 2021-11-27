@@ -1,17 +1,24 @@
 import { FC } from 'react'
 import styled from '@emotion/styled'
 import { Button, Dropdown, Menu } from 'antd'
+import { Route, Routes } from 'react-router'
 import { ButtonNoPadding, Row } from '@/components/Lib'
 import ProjectList from '@/pages/project-list'
 import { useAuth } from '@/context/auth-context'
 import { ReactComponent as SoftwareLogo } from '@/assets/software-logo.svg'
+import Project from '@/pages/project'
+import { resetRoute } from '@/utils'
 
 const BasicLayout: FC = () => {
   return (
     <Container>
       <PageHeader />
       <Main>
-        <ProjectList />
+        <Routes>
+          <Route path='projects' element={<ProjectList />} />
+          <Route path='projects/:projectId/*' element={<Project />} />
+          <Route index element={<ProjectList />} />
+        </Routes>
       </Main>
     </Container>
   )
@@ -23,7 +30,7 @@ const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
-        <ButtonNoPadding type={'link'}>
+        <ButtonNoPadding type={'link'} onClick={resetRoute}>
           <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'} />
         </ButtonNoPadding>
       </HeaderLeft>
