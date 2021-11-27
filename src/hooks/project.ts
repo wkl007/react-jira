@@ -6,9 +6,9 @@ import { cleanObject } from '@/utils'
 export const useProjects = (param?: Partial<ProjectReq>) => {
   const { run, ...result } = useAsync<Project[]>()
 
-  useEffect(() => {
-    run(ProjectServer.getProjectList(cleanObject(param)))
-  }, [param])
+  // useEffect(() => {
+  //   run(ProjectServer.getProjectList(cleanObject(param)))
+  // }, [param])
 
   return result
 }

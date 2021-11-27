@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { Card, Divider, Button } from 'antd'
+import { Card, Divider, Button, Typography } from 'antd'
 import styled from '@emotion/styled'
 import logo from '@/assets/logo.svg'
 import left from '@/assets/left.svg'
@@ -9,6 +9,7 @@ import Register from './components/Register'
 
 const User: FC = () => {
   const [isRegister, setRegister] = useState(false)
+  const [error, setError] = useState<Error | null>(null)
 
   return (
     <Container>
@@ -16,9 +17,24 @@ const User: FC = () => {
       <Background />
       <ShadowCard>
         <Title>{isRegister ? '请注册' : '请登录'}</Title>
-        <>{isRegister ? <Register /> : <Login />}</>
+        {error && (
+          <Typography.Text type='danger'>{error?.message}</Typography.Text>
+        )}
+        <>
+          {isRegister ? (
+            <Register onError={setError} />
+          ) : (
+            <Login onError={setError} />
+          )}
+        </>
         <Divider />
-        <Button type='link' onClick={() => setRegister(!isRegister)}>
+        <Button
+          type='link'
+          onClick={() => {
+            setRegister(!isRegister)
+            setError(null)
+          }}
+        >
           {isRegister ? '已经有账号了？直接登录' : '没有账号？注册新账号'}
         </Button>
       </ShadowCard>

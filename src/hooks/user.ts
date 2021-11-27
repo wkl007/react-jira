@@ -5,9 +5,9 @@ import { useEffect } from 'react'
 export const useUsers = () => {
   const { run, ...result } = useAsync<User[]>()
 
-  useEffect(() => {
-    run(ProjectServer.getUserList())
-  }, [])
+  // useEffect(() => {
+  //   run(ProjectServer.getUserList())
+  // }, [])
 
   return result
 }
