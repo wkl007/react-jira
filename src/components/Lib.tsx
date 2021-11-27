@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { Button, Spin, Typography } from 'antd'
+import { DevTools } from 'jira-dev-tool'
 
 export const Row = styled.div<{
   gap?: number | boolean
@@ -33,6 +34,13 @@ const FullPage = styled.div`
 export const FullPageLoading = () => (
   <FullPage>
     <Spin size={'large'} />
+  </FullPage>
+)
+
+export const FullPageErrorFallback = ({ error }: { error: Error | null }) => (
+  <FullPage>
+    <DevTools />
+    <ErrorBox error={error} />
   </FullPage>
 )
 

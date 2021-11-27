@@ -8,6 +8,9 @@ import React, {
 } from 'react'
 import UserServer, { User } from '@/api/user'
 import { ACCESS_TOKEN } from '@/utils/constants'
+import { useAsync } from '@/hooks/use-async'
+import { useMount } from '@/utils'
+import { FullPageErrorFallback, FullPageLoading } from '@/components/Lib'
 
 interface AuthForm {
   username: string
@@ -23,10 +26,29 @@ const AuthContext = createContext<
     }
   | undefined
 >(undefined)
+
 AuthContext.displayName = 'AuthContext'
 
+const getUserInfo = async () => {
+  let user = null
+  const token = localStorage.getItem(ACCESS_TOKEN)
+  if (token) {
+    const res = await UserServer.getUserInfo()
+    user = res.user
+  }
+  return user
+}
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null)
+  const {
+    data: user,
+    error,
+    isLoading,
+    isIdle,
+    isError,
+    run,
+    setData: setUser,
+  } = useAsync<User | null>()
 
   const login = async (form: AuthForm) => {
     const { user } = await UserServer.login(form)
@@ -45,17 +67,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(null)
   }
 
-  const getUserInfo = useCallback(async () => {
-    const token = localStorage.getItem(ACCESS_TOKEN)
-    if (token) {
-      const { user } = await UserServer.getUserInfo()
-      setUser(user)
-    }
-  }, [])
-
   useEffect(() => {
-    getUserInfo()
-  }, [getUserInfo])
+    run(getUserInfo())
+  }, [run])
+
+  if (isIdle || isLoading) {
+    return <FullPageLoading />
+  }
+
+  if (isError) {
+    return <FullPageErrorFallback error={error} />
+  }
 
   return (
     <AuthContext.Provider
