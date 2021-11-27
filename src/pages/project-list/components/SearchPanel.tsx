@@ -4,8 +4,8 @@ import { ProjectReq, User } from '@/api/project'
 
 interface SearchPanelProps {
   users: User[]
-  params: ProjectReq
-  setParams: Dispatch<SetStateAction<ProjectReq>>
+  params: Partial<Pick<ProjectReq, 'name' | 'personId'>>
+  setParams: (param: SearchPanelProps['params']) => void
 }
 
 const SearchPanel: FC<SearchPanelProps> = ({ users, params, setParams }) => {
@@ -17,26 +17,28 @@ const SearchPanel: FC<SearchPanelProps> = ({ users, params, setParams }) => {
           type='text'
           value={params.name}
           onChange={(e) =>
-            setParams((prevState) => ({
-              ...prevState,
+            setParams({
+              ...params,
               name: e.target.value,
-            }))
+            })
           }
         />
       </Form.Item>
       <Form.Item>
         <Select
+          style={{ width: '200px' }}
           value={params.personId}
           onChange={(value) =>
-            setParams((prevState) => ({
-              ...prevState,
+            setParams({
+              ...params,
               personId: value,
-            }))
+            })
           }
+          placeholder='负责人'
         >
           <Select.Option value=''>负责人</Select.Option>
           {users.map((user) => (
-            <Select.Option key={user.id} value={user.id}>
+            <Select.Option key={user.id} value={String(user.id)}>
               {user.name}
             </Select.Option>
           ))}
