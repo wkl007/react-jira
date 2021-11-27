@@ -1,15 +1,7 @@
-import React, {
-  createContext,
-  ReactNode,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
+import React, { createContext, ReactNode, useContext, useEffect } from 'react'
 import UserServer, { User } from '@/api/user'
 import { ACCESS_TOKEN } from '@/utils/constants'
 import { useAsync } from '@/hooks/use-async'
-import { useMount } from '@/utils'
 import { FullPageErrorFallback, FullPageLoading } from '@/components/Lib'
 
 interface AuthForm {

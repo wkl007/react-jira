@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 import { Typography } from 'antd'
 import { ButtonNoPadding, Row, ScreenContainer } from '@/components/Lib'
-import { useDebounce } from '@/utils'
+import { useDebounce, useDocumentTitle } from '@/utils'
 import { ProjectReq } from '@/api/project'
 import SearchPanel from './components/SearchPanel'
 import List from './components/List'
@@ -9,6 +9,8 @@ import { useProjects } from '@/hooks/project'
 import { useUsers } from '@/hooks/user'
 
 const ProjectList: FC = () => {
+  useDocumentTitle('项目列表', false)
+
   const [params, setParams] = useState<ProjectReq>({
     name: '',
     personId: '',

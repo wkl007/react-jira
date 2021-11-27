@@ -4,12 +4,15 @@ import styled from '@emotion/styled'
 import logo from '@/assets/logo.svg'
 import left from '@/assets/left.svg'
 import right from '@/assets/right.svg'
+import { useDocumentTitle } from '@/utils'
 import Login from './components/Login'
 import Register from './components/Register'
 
 const User: FC = () => {
   const [isRegister, setRegister] = useState(false)
   const [error, setError] = useState<Error | null>(null)
+
+  useDocumentTitle('请登录注册以继续')
 
   return (
     <Container>
