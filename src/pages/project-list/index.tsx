@@ -1,46 +1,23 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import { Typography } from 'antd'
 import { ButtonNoPadding, Row, ScreenContainer } from '@/components/Lib'
-import { cleanObject, useDebounce } from '@/utils'
-import ProjectServer, { Project, ProjectReq, User } from '@/api/project'
+import { useDebounce } from '@/utils'
+import { ProjectReq } from '@/api/project'
 import SearchPanel from './components/SearchPanel'
 import List from './components/List'
+import { useProjects } from '@/hooks/project'
+import { useUsers } from '@/hooks/user'
 
 const ProjectList: FC = () => {
   const [params, setParams] = useState<ProjectReq>({
     name: '',
     personId: '',
   })
-  const [users, setUsers] = useState<User[]>([])
-  const [list, setList] = useState<Project[]>([])
-  const [loading, setLoading] = useState<boolean>(false)
-  const [error, setError] = useState<null | Error>(null)
 
   const debouncedParams = useDebounce(params, 300)
 
-  useEffect(() => {
-    setLoading(true)
-    ProjectServer.getProjectList(cleanObject(debouncedParams))
-      .then((res) => {
-        setList(res)
-      })
-      .catch((e) => {
-        setList([])
-        setError(e)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [debouncedParams])
-
-  useEffect(() => {
-    // axios.get(`${apiUrl}/users`).then((res) => {
-    //   setUsers(res.data)
-    // })
-    ProjectServer.getUserList().then((res) => {
-      setUsers(res)
-    })
-  }, [])
+  const { data: list, isLoading: loading, error } = useProjects(debouncedParams)
+  const { data: users } = useUsers()
 
   return (
     <ScreenContainer>
@@ -48,11 +25,11 @@ const ProjectList: FC = () => {
         <h1>项目列表</h1>
         <ButtonNoPadding type='link'>创建项目</ButtonNoPadding>
       </Row>
-      <SearchPanel users={users} params={params} setParams={setParams} />
+      <SearchPanel users={users || []} params={params} setParams={setParams} />
       {error && (
         <Typography.Text type='danger'>{error?.message}</Typography.Text>
       )}
-      <List users={users} dataSource={list} loading={loading} />
+      <List users={users || []} dataSource={list || []} loading={loading} />
     </ScreenContainer>
   )
 }

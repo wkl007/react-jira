@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import dayjs, { ConfigType } from 'dayjs'
 
 export const dateFormat = (
@@ -57,4 +57,15 @@ export const useArray = <T>(initialArray: T[]) => {
       setValue(copy)
     },
   }
+}
+
+export const useMountedRef = () => {
+  const mountedRef = useRef(false)
+  useEffect(() => {
+    mountedRef.current = true
+    return () => {
+      mountedRef.current = false
+    }
+  })
+  return mountedRef
 }
