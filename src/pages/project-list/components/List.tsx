@@ -1,14 +1,13 @@
 import { FC } from 'react'
-import { Table, TableColumnsType } from 'antd'
+import { Table, TableColumnsType, TableProps } from 'antd'
 import { Project, User } from '@/api/project'
 import { dateFormat } from '@/utils'
 
-interface ListProps {
+interface ListProps extends TableProps<Project> {
   users: User[]
-  list: Project[]
 }
 
-const List: FC<ListProps> = ({ users, list }) => {
+const List: FC<ListProps> = ({ users, ...props }) => {
   const columns: TableColumnsType<Project> = [
     {
       title: '姓名',
@@ -42,7 +41,7 @@ const List: FC<ListProps> = ({ users, list }) => {
       rowKey='id'
       pagination={false}
       columns={columns}
-      dataSource={list}
+      {...props}
     />
   )
 }

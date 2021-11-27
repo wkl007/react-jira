@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react'
+import { Typography } from 'antd'
 import { ButtonNoPadding, Row, ScreenContainer } from '@/components/Lib'
 import { cleanObject, useDebounce } from '@/utils'
 import ProjectServer, { Project, ProjectReq, User } from '@/api/project'
@@ -12,13 +13,24 @@ const ProjectList: FC = () => {
   })
   const [users, setUsers] = useState<User[]>([])
   const [list, setList] = useState<Project[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<null | Error>(null)
 
   const debouncedParams = useDebounce(params, 300)
 
   useEffect(() => {
-    ProjectServer.getProjectList(cleanObject(debouncedParams)).then((res) => {
-      setList(res)
-    })
+    setLoading(true)
+    ProjectServer.getProjectList(cleanObject(debouncedParams))
+      .then((res) => {
+        setList(res)
+      })
+      .catch((e) => {
+        setList([])
+        setError(e)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
   }, [debouncedParams])
 
   useEffect(() => {
@@ -37,7 +49,10 @@ const ProjectList: FC = () => {
         <ButtonNoPadding type='link'>创建项目</ButtonNoPadding>
       </Row>
       <SearchPanel users={users} params={params} setParams={setParams} />
-      <List users={users} list={list} />
+      {error && (
+        <Typography.Text type='danger'>{error?.message}</Typography.Text>
+      )}
+      <List users={users} dataSource={list} loading={loading} />
     </ScreenContainer>
   )
 }
