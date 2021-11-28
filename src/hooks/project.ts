@@ -14,6 +14,35 @@ export const useProjects = (param?: Partial<ProjectReq>) => {
   return result
 }
 
+export const useEditProject = () => {
+  const { run, ...result } = useAsync()
+  const mutate = (params: Partial<Project>) => {
+    return run(ProjectServer.editProject(params))
+  }
+
+  return { mutate, ...result }
+}
+
+export const useAddProject = () => {
+  const { run, ...result } = useAsync()
+  const mutate = (params: Partial<Project>) => {
+    return run(ProjectServer.addProject(params))
+  }
+
+  return { mutate, ...result }
+}
+
+export const useDeleteProject = () => {
+  const { run, ...result } = useAsync()
+  const mutate = (params: Partial<Project>) => {
+    return run(ProjectServer.deleteProject(params))
+  }
+
+  return { mutate, ...result }
+}
+
+export const useProject = () => {}
+
 export const useProjectsSearchParams = () => {
   const [params, setParams] = useUrlQueryParam(['name', 'personId'])
   return [

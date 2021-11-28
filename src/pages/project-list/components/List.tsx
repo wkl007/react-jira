@@ -3,13 +3,29 @@ import { Table, TableColumnsType, TableProps } from 'antd'
 import { Link } from 'react-router-dom'
 import { Project, User } from '@/api/project'
 import { dateFormat } from '@/utils'
+import Pin from '@/components/Pin'
+import { useEditProject } from '@/hooks/project'
 
 interface ListProps extends TableProps<Project> {
   users: User[]
 }
 
 const List: FC<ListProps> = ({ users, ...props }) => {
+  const { mutate } = useEditProject()
+
+  const pinProject = (id: number) => (pin: boolean) => {
+    mutate({ id, pin })
+  }
+
   const columns: TableColumnsType<Project> = [
+    {
+      title: <Pin checked={true} disabled={true} />,
+      render: (value, record) => {
+        return (
+          <Pin checked={record.pin} onCheckedChange={pinProject(record.id)} />
+        )
+      },
+    },
     {
       title: '名称',
       dataIndex: 'name',
