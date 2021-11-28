@@ -12,9 +12,11 @@ const ProjectList: FC = () => {
 
   const [params, setParams] = useProjectsSearchParams()
 
-  const debouncedParams = useDebounce(params, 300)
-
-  const { data: list, isLoading: loading, error } = useProjects(debouncedParams)
+  const {
+    data: list,
+    isLoading: loading,
+    error,
+  } = useProjects(useDebounce(params, 300))
   const { data: users } = useUsers()
 
   return (

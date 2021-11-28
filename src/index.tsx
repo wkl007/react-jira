@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
 import { DevTools, loadServer } from 'jira-dev-tool'
-import 'antd/dist/antd.less'
+import '@/configs/wdyr'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { AppProviders } from './context'
+
+import 'antd/dist/antd.less'
 
 loadServer(() => {
   ReactDOM.render(

@@ -18,9 +18,7 @@ export const useProjectsSearchParams = () => {
   const [params, setParams] = useUrlQueryParam(['name', 'personId'])
   return [
     useMemo(
-      () => ({
-        ...params,
-      }),
+      () => ({ ...params, personId: Number(params.personId) || undefined }),
       [params]
     ),
     setParams,

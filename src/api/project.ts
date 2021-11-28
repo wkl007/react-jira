@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export interface ProjectReq {
   name: string
-  personId: string
+  personId: number
 }
 
 export interface User {
