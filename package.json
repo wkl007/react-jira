@@ -15,7 +15,7 @@
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "antd": "^4.16.13",
-    "axios": "^0.21.1",
+    "axios": "^0.24.0",
     "dayjs": "^1.10.6",
     "jira-dev-tool": "1.6.59",
     "react": "^17.0.2",
@@ -28,8 +28,8 @@
     "web-vitals": "^2.1.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^13.1.0",
-    "@commitlint/config-conventional": "^13.1.0",
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
     "@craco/craco": "^6.2.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^12.0.0",
@@ -42,16 +42,16 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^7.0.2",
-    "json-server": "^0.16.3",
+    "json-server": "^0.17.0",
     "less": "^4.1.1",
     "less-loader": "^10.0.1",
-    "lint-staged": "^11.1.2",
+    "lint-staged": "^12.1.2",
     "prettier": "^2.3.2",
-    "stylelint": "^13.13.1",
-    "stylelint-config-prettier": "^8.0.2",
+    "stylelint": "^14.1.0",
+    "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-rational-order": "^0.1.2",
-    "stylelint-config-standard": "^22.0.0",
-    "stylelint-order": "^4.1.0"
+    "stylelint-config-standard": "^24.0.0",
+    "stylelint-order": "^5.0.0"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": "prettier --write",
