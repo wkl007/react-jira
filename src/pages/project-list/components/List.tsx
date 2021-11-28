@@ -8,13 +8,15 @@ import { useEditProject } from '@/hooks/project'
 
 interface ListProps extends TableProps<Project> {
   users: User[]
+  refresh?: () => void
 }
 
-const List: FC<ListProps> = ({ users, ...props }) => {
+const List: FC<ListProps> = ({ users, refresh, ...props }) => {
   const { mutate } = useEditProject()
 
-  const pinProject = (id: number) => (pin: boolean) => {
-    mutate({ id, pin })
+  const pinProject = (id: number) => async (pin: boolean) => {
+    await mutate({ id, pin })
+    await refresh?.()
   }
 
   const columns: TableColumnsType<Project> = [

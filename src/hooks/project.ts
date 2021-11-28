@@ -1,15 +1,21 @@
 import { useAsync } from '@/hooks/use-async'
 import ProjectServer, { Project, ProjectReq } from '@/api/project'
-import { useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { cleanObject } from '@/utils'
 import { useUrlQueryParam } from '@/hooks/url'
 
 export const useProjects = (param?: Partial<ProjectReq>) => {
   const { run, ...result } = useAsync<Project[]>()
 
+  const fetchProject = useCallback(() => {
+    return ProjectServer.getProjectList(cleanObject(param || {}))
+  }, [param])
+
   useEffect(() => {
-    run(ProjectServer.getProjectList(cleanObject(param)))
-  }, [param, run])
+    run(fetchProject(), {
+      retry: fetchProject,
+    })
+  }, [fetchProject, param, run])
 
   return result
 }

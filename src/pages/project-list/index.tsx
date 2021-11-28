@@ -16,6 +16,7 @@ const ProjectList: FC = () => {
     data: list,
     isLoading: loading,
     error,
+    retry,
   } = useProjects(useDebounce(params, 300))
   const { data: users } = useUsers()
 
@@ -29,7 +30,12 @@ const ProjectList: FC = () => {
       {error && (
         <Typography.Text type='danger'>{error?.message}</Typography.Text>
       )}
-      <List users={users || []} dataSource={list || []} loading={loading} />
+      <List
+        users={users || []}
+        dataSource={list || []}
+        loading={loading}
+        refresh={retry}
+      />
     </ScreenContainer>
   )
 }
