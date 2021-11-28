@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import '@/App.css'
 import User from '@/pages/user'
 import BasicLayout from '@/layouts/BasicLayout'
-import { ErrorBoundary } from '@/components/error-boundary'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { useAuth } from '@/context/auth-context'
 import { FullPageErrorFallback, FullPageLoading } from '@/components/Lib'
 

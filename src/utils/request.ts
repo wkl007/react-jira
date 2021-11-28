@@ -21,7 +21,10 @@ function requestHandler(
   config: AxiosRequestConfig
 ): AxiosRequestConfig | Promise<AxiosRequestConfig> {
   const token = localStorage.getItem(ACCESS_TOKEN)
-  if (token) config.headers.Authorization = token
+  if (token) {
+    // @ts-ignore
+    config.headers.Authorization = token
+  }
   return config
 }
 
